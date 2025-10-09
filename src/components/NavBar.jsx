@@ -3,11 +3,13 @@ import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/AppContext";
 import SettingsModal from "./SettingsModal";
+import AuthModal from "./AuthModal";
 
 export default function NavBar() {
   const { user, signOut } = useAuth();
   const showToast = useToast();
   const [showSettings, setShowSettings] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -56,9 +58,20 @@ export default function NavBar() {
               </button>
             </div>
           ) : (
-            <div className="text-xs sm:text-sm text-gray-400">
-              <span className="hidden sm:inline">Sign in to save your recipes</span>
-              <span className="sm:hidden">Sign in</span>
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="text-xs sm:text-sm text-gray-400">
+                <span className="hidden sm:inline">Sign in to save your recipes</span>
+                <span className="sm:hidden">Sign in</span>
+              </div>
+              <button
+                onClick={() => setShowAuthModal(true)}
+                className="bg-green-600 hover:bg-green-700 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center space-x-1"
+              >
+                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                </svg>
+                <span>Sign In</span>
+              </button>
             </div>
           )}
         </div>
@@ -68,6 +81,12 @@ export default function NavBar() {
       <SettingsModal 
         isOpen={showSettings} 
         onClose={() => setShowSettings(false)} 
+      />
+      
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={showAuthModal} 
+        onClose={() => setShowAuthModal(false)} 
       />
     </nav>
   );

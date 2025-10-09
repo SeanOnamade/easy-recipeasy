@@ -5,7 +5,6 @@ import { useToast, useLoading } from "../contexts/AppContext";
 import TabbedInterface from "../components/TabbedInterface";
 import RecipeCard from "../components/RecipeCard";
 import RecipeHistoryFirebase from "../components/RecipeHistoryFirebase";
-import AuthModal from "../components/AuthModal";
 import NavBar from "../components/NavBar";
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
   const showToast = useToast();
   const { isLoading, setLoading } = useLoading();
   const [recipes, setRecipes] = useState([]);
-  const [showAuthModal, setShowAuthModal] = useState(false);
   const [showNewRecipes, setShowNewRecipes] = useState(false);
   
   // Handle escape key to close overlay
@@ -48,7 +46,7 @@ export default function Home() {
   const handleSaveRecipe = async (recipe) => {
     if (!user) {
       showToast("Please sign in to save recipes", "error");
-      setShowAuthModal(true);
+      // Auth modal is now handled in NavBar
       return;
     }
 
@@ -152,11 +150,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* Auth Modal */}
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
-      />
     </div>
   );
 }
