@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast, useLoading } from "../contexts/AppContext";
 import TabbedInterface from "../components/TabbedInterface";
+import MobileTabbedInterface from "../components/MobileTabbedInterface";
 import RecipeCard from "../components/RecipeCard";
 import RecipeHistoryFirebase from "../components/RecipeHistoryFirebase";
 import NavBar from "../components/NavBar";
@@ -83,14 +84,20 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 h-full">
+        {/* Mobile Layout - Single Column with 5 Tabs */}
+        <div className="lg:hidden">
+          <MobileTabbedInterface onRecipesGenerated={handleRecipesGenerated} />
+        </div>
+
+        {/* Desktop Layout - Two Columns */}
+        <div className="hidden lg:grid grid-cols-2 gap-6 lg:gap-8 h-full">
           {/* Left Column - Tabbed Interface */}
-          <div className="h-[calc(100vh-8rem)] sm:h-[calc(100vh-10rem)] lg:h-[calc(100vh-8rem)]">
+          <div className="h-[calc(100vh-8rem)]">
             <TabbedInterface onRecipesGenerated={handleRecipesGenerated} />
           </div>
 
           {/* Right Column - Recipe History */}
-          <div className="h-[calc(100vh-8rem)] sm:h-[calc(100vh-10rem)] lg:h-[calc(100vh-8rem)]">
+          <div className="h-[calc(100vh-8rem)]">
             <RecipeHistoryFirebase onClose={() => {}} />
           </div>
         </div>
