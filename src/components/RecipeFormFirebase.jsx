@@ -190,7 +190,7 @@ export default function RecipeForm({ onRecipesGenerated }) {
           className={`w-full py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 transform ${
             localLoading 
               ? "bg-gray-600 cursor-not-allowed" 
-              : "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 hover:shadow-xl hover:shadow-green-500/25 hover:-translate-y-1"
+              : "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 hover:shadow-xl hover:shadow-green-500/25 hover:-translate-y-1 cursor-pointer"
           }`}
         >
           {localLoading ? (
